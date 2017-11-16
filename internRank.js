@@ -1,20 +1,24 @@
 const input = document.getElementsByClassName('input')[0];
 const output = document.getElementsByClassName('output')[0];
+const weightInputArr = document.getElementsByTagName('input');
+
+//set weight defaults
+let weights = {
+	technical_skill: 3,
+	project_breadth: 2,
+	passion_for_web: 1
+};
 
 rankInterns = (internArr) => {
 
-	const weights = {
-		technical_skill_WEIGHT: 3,
-		project_breadth_WEIGHT: 2,
-		passion_for_web_WEIGHT: 1
-	};
+
 
 	internArr.forEach((e, i) => {
 
 		let scoreArr = [];
 		Object.keys(e).forEach((e2, i2) => {
 			if (e2 != 'name') {
-				scoreArr.push(e[e2] * weights[`${e2}_WEIGHT`]);
+				scoreArr.push(e[e2] * weights[e2]);
 			}
 		});
 
@@ -34,26 +38,13 @@ rankInterns = (internArr) => {
 
 };
 
-// let finalArr = rankInterns(interns);
-//
-// finalArr.sort((a, b) => {
-// 	return a.score + b.score;
-// });
-//
-// console.log('Final Scores Are: ');
-// console.log(finalArr);
-
-
 function validateJSON(e) {
 
 	let {value: JSONstr} = this;
-
-	// console.log('asda', JSONstr)
 	try {
 		JSONstr = JSON.parse(JSONstr);
 	} catch (e) {
 		input.classList.toggle('invalid');
-		// console.log('asda false')
 		return false;
 	}
 	input.classList.toggle('valid');
@@ -62,17 +53,28 @@ function validateJSON(e) {
 
 
 function rankAndSort(inArr) {
-
 	let finalArr = rankInterns(inArr);
-
+	output.innerHTML = '';
 	finalArr.forEach((e, i) => {
 		let newItem = document.createElement("li");
 		newItem.appendChild(document.createTextNode(e.outputStr));
 		output.appendChild(newItem);
 	});
+}
 
 
-	output.value = JSON.stringify(finalArr, null, 2)
+function changeWeight(e) {
+	let {value, id} = this;
+	weights[id] = value;
 }
 
 input.addEventListener('keyup', validateJSON);
+
+// weightInputArr.forEach((e, i) => {
+// 	e.addEventListener('change', changeWeight);
+// });
+
+
+for (let i = 0; i < weightInputArr.length; i++) {
+	weightInputArr[i].addEventListener('change', changeWeight);
+}

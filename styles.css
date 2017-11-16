@@ -3,6 +3,15 @@ h1 {
     text-align: center;
 }
 
+.weights{
+    display: flex;
+    justify-content: center;
+}
+
+input{
+    margin: 0px 10px;
+}
+
 footer{
     position: absolute;
     bottom: 10px;
@@ -26,7 +35,7 @@ footer p {
 .input, .output{
     text-align: left;
     width: 80%;
-    height: 81vh;
+    height: 50vh;
 }
 
 .invalid{
