@@ -1,6 +1,4 @@
-# applicant-rank
-
-[![Live Application]](https://applicant-rank.netlify.com/)
+# [applicant-rank](https://applicant-rank.netlify.com/)
 
 Quick page to rank job applicants based on weights
 
